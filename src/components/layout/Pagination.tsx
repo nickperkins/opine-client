@@ -6,7 +6,11 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ totalPages, currentPage, onPageChange }) => {
+const Pagination: React.FC<PaginationProps> = ({
+  totalPages,
+  currentPage,
+  onPageChange,
+}) => {
   const [page, setPage] = useState(currentPage);
 
   const handlePageChange = (page: number) => {
@@ -17,7 +21,13 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages, currentPage, onPage
   return (
     <div className="pagination">
       {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
-        <button className={page === p ? "current" : ""} key={p} onClick={() => handlePageChange(p)}>{p}</button>
+        <button
+          className={page === p ? "current" : ""}
+          key={p}
+          onClick={() => handlePageChange(p)}
+        >
+          {p}
+        </button>
       ))}
     </div>
   );

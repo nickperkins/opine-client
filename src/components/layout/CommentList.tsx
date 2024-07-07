@@ -8,32 +8,39 @@ interface CommentListProps {
   comments: IComment[];
 }
 
-const CommentList: React.FC<CommentListProps> = ({ containerId, pageSize, comments }) => {
-const [currentPage, setCurrentPage] = useState<number>(1);
+const CommentList: React.FC<CommentListProps> = ({
+  containerId,
+  pageSize,
+  comments,
+}) => {
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
-// slice comments based on the current page
-const getPaginatedComments = useCallback(() => {
-  return comments.slice((currentPage - 1) * pageSize, currentPage * pageSize);
-}, [comments, currentPage, pageSize]);
+  // slice comments based on the current page
+  const getPaginatedComments = useCallback(() => {
+    return comments.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+  }, [comments, currentPage, pageSize]);
 
-// handle page change
-const goToPage = async (page: number) => {
-  setCurrentPage(page);
-};
+  // handle page change
+  const goToPage = async (page: number) => {
+    setCurrentPage(page);
+  };
 
-return (
-  <div id={containerId}>
-    <div>
-      {getPaginatedComments().map((comment) => (
-        <div id={"comment-" + comment.id} key={comment.id}>
-          <strong>{comment.author}</strong> - {comment.body}
-        </div>
-      ))}
+  return (
+    <div id={containerId}>
+      <div>
+        {getPaginatedComments().map((comment) => (
+          <div id={"comment-" + comment.id} key={comment.id}>
+            <strong>{comment.author}</strong> - {comment.body}
+          </div>
+        ))}
+      </div>
+      <Pagination
+        totalPages={Math.ceil(comments.length / pageSize)}
+        currentPage={currentPage}
+        onPageChange={goToPage}
+      />
     </div>
-    <Pagination totalPages={Math.ceil(comments.length / pageSize)} currentPage={currentPage} onPageChange={goToPage} />
-  </div>
-);
-
+  );
 };
 
 export default CommentList;

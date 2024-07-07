@@ -7,13 +7,16 @@ interface CommentFormProps {
   containerId: string;
 }
 
-const CommentForm: React.FC<CommentFormProps> = ({ containerId, onCommentSubmit }) => {
+const CommentForm: React.FC<CommentFormProps> = ({
+  containerId,
+  onCommentSubmit,
+}) => {
   // State to store form data
   const [formData, setFormData] = useState<{ [key: string]: string }>({});
 
   // Handle input change
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({
       ...formData,
@@ -43,18 +46,30 @@ const CommentForm: React.FC<CommentFormProps> = ({ containerId, onCommentSubmit 
     }
     // Clear the form fields
     setFormData({});
-
-
-
   };
 
-  return <div id={containerId}>
-       <form id="opine-form" onSubmit={handleSubmit}>
-      <input name="author" type="text" placeholder="Author" value={formData.author || ""} onChange={handleChange} required />
-      <textarea name="body" placeholder="Comment" value={formData.body || ""} onChange={handleChange} required></textarea>
-      <button type="submit">Submit Comment</button>
-    </form>
-  </div>;
+  return (
+    <div id={containerId}>
+      <form id="opine-form" onSubmit={handleSubmit}>
+        <input
+          name="author"
+          type="text"
+          placeholder="Author"
+          value={formData.author || ""}
+          onChange={handleChange}
+          required
+        />
+        <textarea
+          name="body"
+          placeholder="Comment"
+          value={formData.body || ""}
+          onChange={handleChange}
+          required
+        ></textarea>
+        <button type="submit">Submit Comment</button>
+      </form>
+    </div>
+  );
 };
 
 export default CommentForm;

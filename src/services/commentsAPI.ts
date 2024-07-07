@@ -5,9 +5,8 @@ import axios from "axios";
 
 export async function getComments(slug: string): Promise<IComment[]> {
   try {
-    const apiURL = process.env.REACT_APP_API_URL || '';
+    const apiURL = process.env.REACT_APP_API_URL || "";
     const response = await axios.get(`${apiURL}/comments/${slug}`);
-
 
     return response.data.map((comment: any) => ({
       id: comment.id,
@@ -20,11 +19,17 @@ export async function getComments(slug: string): Promise<IComment[]> {
     return [];
   }
 }
-export async function postComment(slug: string, comment: IComment): Promise<IComment | void>  {
-  const apiURL = process.env.REACT_APP_API_URL || '';
+export async function postComment(
+  slug: string,
+  comment: IComment,
+): Promise<IComment | void> {
+  const apiURL = process.env.REACT_APP_API_URL || "";
   const commentData = JSON.stringify(comment);
   try {
-    const response = await axios.post(`${apiURL}/comments/${slug}`, commentData);
+    const response = await axios.post(
+      `${apiURL}/comments/${slug}`,
+      commentData,
+    );
     return {
       id: response.data.id,
       author: response.data.author,
