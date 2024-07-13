@@ -28,6 +28,7 @@ const CommentList: React.FC<CommentListProps> = ({
   return (
     <div id={containerId}>
       <div>
+        {comments.length === 0 && <div>Be the first to comment.</div>}
         {getPaginatedComments().map((comment) => (
           <div id={"comment-" + comment.id} key={comment.id}>
             <strong>{comment.author}</strong> - {comment.body}

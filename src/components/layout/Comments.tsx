@@ -1,38 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
-import { AppConfigContext } from "../../config";
+import useComments from "../../hooks/useComments";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
-import { getComments } from "../../services/commentsAPI";
-import { IComment } from "../../types/IComment";
 
 function Comments() {
-  const [comments, setComments] = useState<IComment[]>([]);
+  const { comments, isLoading, error } = useComments("test-slug");
 
-  // load comments from the API
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const response = await getComments("test-slug"); //TODO: getSlug(window.location.pathname)
-        setComments(response);
-      } catch (error) {
-        console.error("Failed to fetch comments:", error);
-      }
-    };
-    fetchComments();
-  }, []);
-
-  const addComment = (newComment: IComment) => {
-    setComments([...comments, newComment]);
-  };
+  if (isLoading) return <div>Loading comments...</div>;
+  if (error) return <div>Error loading comments: {error}</div>;
 
   return (
     <>
-      <AppConfigContext.Provider
-        value={{ apiUrl: "http://localhost:3001", featureFlag: true }}
-      >
-        <CommentForm containerId="comment-form" onCommentSubmit={addComment} />
+        <CommentForm containerId="comment-form" />
         <CommentList containerId="comments" pageSize={5} comments={comments} />
-      </AppConfigContext.Provider>
     </>
   );
 }

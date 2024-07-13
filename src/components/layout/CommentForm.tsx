@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import { postComment } from "../../services/commentsAPI";
-import { IComment } from "../../types/IComment";
+import useComments from "../../hooks/useComments";
 
 interface CommentFormProps {
-  onCommentSubmit: (newComment: IComment) => void;
   containerId: string;
 }
 
 const CommentForm: React.FC<CommentFormProps> = ({
-  containerId,
-  onCommentSubmit,
+  containerId
 }) => {
   // State to store form data
+  const { addComment } = useComments(containerId);
   const [formData, setFormData] = useState<{ [key: string]: string }>({});
 
   // Handle input change
@@ -27,25 +25,12 @@ const CommentForm: React.FC<CommentFormProps> = ({
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const comment: IComment = {
-      id: 0, // The API will generate the ID
+    await addComment({
       author: formData.author,
       body: formData.body,
-      createdAt: new Date(), // The API will generate the timestamp
-    };
-    try {
-      const result = await postComment("test-slug", comment); //TODO: getSlug(window.location.pathname)
-      if (!result) {
-        console.error("Failed to submit comment");
-        return;
-      }
-      onCommentSubmit(result);
+    });
       setFormData({});
-    } catch (error) {
-      console.error("Failed to submit comment:", error);
-    }
-    // Clear the form fields
-    setFormData({});
+
   };
 
   return (
