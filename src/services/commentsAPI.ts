@@ -29,14 +29,14 @@ export class CommentsAPI {
 
   public async postComment(
     slug: string,
-    comment: Omit<IComment, "id" | "createdAt">
+    comment: Omit<IComment, "id" | "createdAt">,
   ): Promise<IComment | void> {
     const apiURL = this.appConfig.apiUrl;
     const commentData = JSON.stringify(comment);
     try {
       const response = await axios.post(
         `${apiURL}/comments/${slug}`,
-        commentData
+        commentData,
       );
       return {
         id: response.data.id,

@@ -1,9 +1,50 @@
 import React, { useState } from "react";
 import useComments from "../../hooks/useComments";
+import styled from "styled-components";
 
 interface CommentFormProps {
   containerId: string;
 }
+
+const Container = styled.div`
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    `;
+
+  const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    `;
+
+
+  const Input = styled.input`
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    `;
+
+  const Textarea = styled.textarea`
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    `;
+
+  const Button = styled.button`
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    `;
 
 const CommentForm: React.FC<CommentFormProps> = ({
   containerId
@@ -34,9 +75,9 @@ const CommentForm: React.FC<CommentFormProps> = ({
   };
 
   return (
-    <div id={containerId}>
-      <form id="opine-form" onSubmit={handleSubmit}>
-        <input
+    <Container id={containerId}>
+      <Form id="opine-form" onSubmit={handleSubmit}>
+        <Input
           name="author"
           type="text"
           placeholder="Author"
@@ -44,16 +85,16 @@ const CommentForm: React.FC<CommentFormProps> = ({
           onChange={handleChange}
           required
         />
-        <textarea
+        <Textarea
           name="body"
           placeholder="Comment"
           value={formData.body || ""}
           onChange={handleChange}
           required
-        ></textarea>
-        <button type="submit">Submit Comment</button>
-      </form>
-    </div>
+        ></Textarea>
+        <Button type="submit">Submit Comment</Button>
+      </Form>
+    </Container>
   );
 };
 
