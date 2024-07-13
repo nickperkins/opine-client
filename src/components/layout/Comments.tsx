@@ -10,8 +10,8 @@ function Comments() {
 
   return (
     <>
-        <CommentForm containerId="comment-form" />
-        <CommentList containerId="comments" pageSize={5} comments={comments} />
+      <CommentForm containerId="comment-form" />
+      <CommentList containerId="comments" pageSize={5} comments={comments} />
     </>
   );
 }

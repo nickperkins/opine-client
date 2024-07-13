@@ -30,7 +30,7 @@ const useComments = (slug: string) => {
     try {
       const postedComment = await commentsAPI.postComment(slug, newComment);
       setComments((prevComments) =>
-        postedComment ? [postedComment, ...prevComments] : prevComments,
+        postedComment ? [postedComment, ...prevComments] : prevComments
       );
       setIsLoading(false);
     } catch (err) {

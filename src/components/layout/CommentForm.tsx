@@ -7,55 +7,52 @@ interface CommentFormProps {
 }
 
 const Container = styled.div`
-    padding: 20px;
-    margin-top: 20px;
-    border: 1px solid #ccc;
-    `;
+  padding: 20px;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+`;
 
-  const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-    `;
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
 
+const Input = styled.input`
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+`;
 
-  const Input = styled.input`
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    `;
+const Textarea = styled.textarea`
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+`;
 
-  const Textarea = styled.textarea`
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    `;
+const Button = styled.button`
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+`;
 
-  const Button = styled.button`
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    `;
-
-const CommentForm: React.FC<CommentFormProps> = ({
-  containerId
-}) => {
+const CommentForm: React.FC<CommentFormProps> = ({ containerId }) => {
   // State to store form data
   const { addComment } = useComments(containerId);
   const [formData, setFormData] = useState<{ [key: string]: string }>({});
 
   // Handle input change
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({
       ...formData,
@@ -70,8 +67,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
       author: formData.author,
       body: formData.body,
     });
-      setFormData({});
-
+    setFormData({});
   };
 
   return (
