@@ -2,16 +2,24 @@
   "name": "opine-client",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
+    "@vitejs/plugin-react-swc": "^3.7.0",
+    "axios": "^1.7.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "styled-components": "6.1.11"
+    "styled-components": "6.1.11",
+    "vite": "^5.3.5",
+    "vite-plugin": "^0.0.0",
+    "vite-plugin-svgr": "^4.2.0",
+    "vite-tsconfig-paths": "^4.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage --watch=false",
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "eslint src --fix --ext .ts,.tsx",
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
@@ -43,12 +51,14 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "@vitest/coverage-v8": "^2.0.4",
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-prettier": "^5.1.3",
+    "jsdom": "^24.1.1",
     "prettier": "^3.3.2",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.4.2"
+    "typescript": "^4.4.2",
+    "vitest": "^2.0.4"
   }
 }

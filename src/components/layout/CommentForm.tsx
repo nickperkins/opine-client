@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import useComments from "../../hooks/useComments";
 import styled from "styled-components";
 
 interface CommentFormProps {
   containerId: string;
+  newCommentHandler: (comment: {
+    author: string;
+    body: string;
+  }) => Promise<void>;
 }
 
 const Container = styled.div`
@@ -45,9 +48,11 @@ const Button = styled.button`
   width: 100%;
 `;
 
-const CommentForm: React.FC<CommentFormProps> = ({ containerId }) => {
+const CommentForm: React.FC<CommentFormProps> = ({
+  containerId,
+  newCommentHandler,
+}) => {
   // State to store form data
-  const { addComment } = useComments(containerId);
   const [formData, setFormData] = useState<{ [key: string]: string }>({});
 
   // Handle input change
@@ -63,7 +68,7 @@ const CommentForm: React.FC<CommentFormProps> = ({ containerId }) => {
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await addComment({
+    await newCommentHandler({
       author: formData.author,
       body: formData.body,
     });

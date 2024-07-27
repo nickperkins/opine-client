@@ -3,9 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import Comments from "./components/layout/Comments";
 
-const scriptTag = document.currentScript as HTMLScriptElement;
-const apiUrl =
-  scriptTag.getAttribute("data-api-url") || "http://localhost:8787";
+const scriptTag = document.getElementById("opine-script") as HTMLElement;
+const apiUrl = scriptTag.dataset.apiUrl as string;
 const featureFlag = scriptTag.getAttribute("data-feature-flag") === "true";
 
 export const AppConfigContext = React.createContext({

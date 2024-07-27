@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback, useContext, useMemo } from "react";
-import { IComment } from "../types/IComment";
+import { Comment } from "../types/Comment";
 import { CommentsAPI } from "../services/CommentsAPI";
 import { AppConfigContext } from "../index";
 
 const useComments = (slug: string) => {
-  const [comments, setComments] = useState<IComment[]>([]);
+  const [comments, setComments] = useState<Comment[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const appConfig = useContext(AppConfigContext);
@@ -25,7 +25,7 @@ const useComments = (slug: string) => {
   }, [slug, commentsAPI]);
 
   // Post a comment
-  const addComment = async (newComment: Omit<IComment, "id" | "createdAt">) => {
+  const addComment = async (newComment: Omit<Comment, "id" | "createdAt">) => {
     setIsLoading(true);
     try {
       const postedComment = await commentsAPI.postComment(slug, newComment);
@@ -39,7 +39,6 @@ const useComments = (slug: string) => {
     }
   };
 
-  // Automatically load comments when the containerId changes
   useEffect(() => {
     loadComments();
   }, [loadComments]);

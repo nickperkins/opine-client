@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from "react";
-import { IComment } from "../../types/IComment";
+import { Comment } from "../../types/Comment";
 import Pagination from "./Pagination";
 
 interface CommentListProps {
   containerId: string;
   pageSize: number;
-  comments: IComment[];
+  comments: Comment[];
 }
 
 const CommentList: React.FC<CommentListProps> = ({

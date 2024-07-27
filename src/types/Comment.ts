@@ -1,8 +1,8 @@
-export interface IComment {
+export interface Comment {
   id: number;
   author: string;
   body: string;
   createdAt: Date;
 }
 
-export default IComment;
+export default Comment;

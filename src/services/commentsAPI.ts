@@ -1,6 +1,6 @@
 // src/api/commentsAPI.ts
 import { AppConfig } from "../config";
-import { IComment } from "../types/IComment";
+import { Comment } from "../types/Comment";
 import axios from "axios";
 
 export class CommentsAPI {
@@ -10,12 +10,12 @@ export class CommentsAPI {
     this.appConfig = appConfig;
   }
 
-  public async getComments(slug: string): Promise<IComment[]> {
+  public async getComments(slug: string): Promise<Comment[]> {
     try {
       const apiURL = this.appConfig.apiUrl;
       const response = await axios.get(`${apiURL}/comments/${slug}`);
 
-      return response.data.map((comment: any) => ({
+      return response.data.map((comment: Comment) => ({
         id: comment.id,
         author: comment.author,
         body: comment.body,
@@ -29,8 +29,8 @@ export class CommentsAPI {
 
   public async postComment(
     slug: string,
-    comment: Omit<IComment, "id" | "createdAt">
-  ): Promise<IComment | void> {
+    comment: Omit<Comment, "id" | "createdAt">
+  ): Promise<Comment | void> {
     const apiURL = this.appConfig.apiUrl;
     const commentData = JSON.stringify(comment);
     try {
